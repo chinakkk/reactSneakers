@@ -115,6 +115,8 @@ function App() {
                     <Card sale={'14000'} nameSneakers={'Мужские Кроссовки Nike Blazer Mid Suede'} linkSneakers={'./img/sneakers/2.jpg'}/>
                     <Card sale={'15499'} nameSneakers={'Мужские Кроссовки Nike Blazer Mid Suede'} linkSneakers={'./img/sneakers/3.jpg'}/>
                     <Card sale={'10000'} nameSneakers={'Мужские Кроссовки Nike Blazer Mid Suede'} linkSneakers={'./img/sneakers/4.jpg'}/>
+                    <Card sale={'10000'} nameSneakers={'Мужские Кроссовки Nike Blazer Mid Suede'} linkSneakers={'./img/sneakers/4.jpg'}/>
+                    <Card sale={'10000'} nameSneakers={'Мужские Кроссовки Nike Blazer Mid Suede'} linkSneakers={'./img/sneakers/4.jpg'}/>
                 </div>
 
 
