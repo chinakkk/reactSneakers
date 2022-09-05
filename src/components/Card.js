@@ -8,12 +8,12 @@ const Card=(props)=>{
                 <div className={'favorite'}>
                     <img src="./img/btnHeart0.svg" alt="Unlike"/>
                 </div>
-                <img width={133} height={112} src={props.linkSneakers} alt={'Sneakers'}/>
-                <h5>{props.nameSneakers}</h5>
+                <img width={133} height={112} src={props.src} alt={'Sneakers'}/>
+                <h5>{props.name}</h5>
                 <div className={'cardBottom d-flex justify-between align-center'}>
                     <div className={'d-flex flex-column'}>
                         <p>Цена</p>
-                        <b>{props.sale} р.</b>
+                        <b>{props.price} р.</b>
                     </div>
                     <img className={'d-flex align-center m-5'}
                          src="./img/btnPlus.svg"/>
