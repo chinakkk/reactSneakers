@@ -11,9 +11,8 @@ const Header=(props)=>{
                 </div>
             </div>
             <ul className={'headerRight d-flex align-center '}>
-                <li className={'mr-30 d-flex align-center'}>
+                <li className={'mr-30 d-flex align-center cu-p'} onClick={props.onClickCart}>
                     <img className={'mr-10 button'} width={'18px'} height={'18px'} src="./img/card.svg"/>
-
                     <span>1205p</span>
                 </li>
                 <li className={'d-flex align-center'}>
