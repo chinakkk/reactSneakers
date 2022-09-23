@@ -1,15 +1,19 @@
-const DrawerCart = ({onClickOverlay, cartItems=[]}) => {
+import {logDOM} from "@testing-library/react";
+
+const DrawerCart = ({onClickDelete,onClickOverlay, cartItems = []}) => {
     return (
         <div className="overlay d-flex">
             <div className={'cartGray'} onClick={onClickOverlay}></div>
             <div className="drawer d-flex flex-column">
                 <div className={'d-flex justify-between'}>
                     <h2 className={'mb-30 mt-30'}>Корзина</h2>
-                    <img className={'button cartRemoveButton'} src="./img/btnKrest.svg" alt="Krest"
+                    <img className={'button cartRemoveButton'}
+                         src="./img/btnKrest.svg" alt="Krest"
                          onClick={onClickOverlay}/>
                 </div>
                 <div className="cartItems">
                     {cartItems.map((item) => {
+
                         return (
                             <div className={'cartItem d-flex align-center'}>
                                 <img className={'mb-20 mr-20'} height={70} width={70} src={item.src}
@@ -19,7 +23,11 @@ const DrawerCart = ({onClickOverlay, cartItems=[]}) => {
                                     <b>{item.price} руб.</b>
                                 </div>
 
-                                <img className={'button cartRemoveButton'} src="./img/btnKrest.svg" alt="Krest"/>
+                                <img onClick={()=>onClickDelete(item.id)}
+                                     className={'button cartRemoveButton'}
+                                     src="./img/btnKrest.svg"
+                                     alt="Krest"/>
+
                             </div>
                         )
                     })}
