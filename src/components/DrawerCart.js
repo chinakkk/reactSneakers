@@ -1,6 +1,6 @@
 import {logDOM} from "@testing-library/react";
 
-const DrawerCart = ({onClickDelete,onClickOverlay, cartItems = []}) => {
+const DrawerCart = ({onClickDelete, onClickOverlay, cartItems = []}) => {
     return (
         <div className="overlay d-flex">
             <div className={'cartGray'} onClick={onClickOverlay}></div>
@@ -12,8 +12,9 @@ const DrawerCart = ({onClickDelete,onClickOverlay, cartItems = []}) => {
                          onClick={onClickOverlay}/>
                 </div>
                 <div className="cartItems">
-                    {cartItems.map((item) => {
 
+                    {cartItems.length > 0 ?
+                        cartItems.map((item) => {
                         return (
                             <div className={'cartItem d-flex align-center'}>
                                 <img className={'mb-20 mr-20'} height={70} width={70} src={item.src}
@@ -23,14 +24,18 @@ const DrawerCart = ({onClickDelete,onClickOverlay, cartItems = []}) => {
                                     <b>{item.price} руб.</b>
                                 </div>
 
-                                <img onClick={()=>onClickDelete(item.id)}
+                                <img onClick={() => onClickDelete(item.id)}
                                      className={'button cartRemoveButton'}
                                      src="./img/btnKrest.svg"
                                      alt="Krest"/>
-
                             </div>
                         )
-                    })}
+                    }) : <div className={'cartIsClear'}>
+                            <h2>Корзина пуста</h2>
+                            <button onClick={onClickOverlay}>Вернуться назад</button>
+                        </div>
+                    }
+
                 </div>
                 <ul className={'cartTotalBlock mb-20'}>
                     <li className={'d-flex mb-20'}>

@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import {Route} from 'react-router-dom';
 import Card from "./components/Card/Card";
 import Header from "./components/Header";
 import DrawerCart from "./components/DrawerCart";
@@ -20,6 +21,8 @@ function App() {
     const [cartItems, setCartItems] = React.useState([])
     const [searchInput, setSearchInput] = React.useState('')
     const [items, setItems] = React.useState([])
+    const [favorites, setFavorites] = React.useState([])
+
 
     React.useEffect(() => {
 
@@ -33,33 +36,42 @@ function App() {
 
     }, [])
 
-    const addToCart = (item) => {
+    const addToFavoriteView = (item) => {
+        axios.post('https://631a621adc236c0b1edd3f63.mockapi.io/favorite', item)
+        setFavorites(
+            favorites.find((favoritesItem) => favoritesItem === item.name)
+                ? prevState => [...prevState.filter((favoritesItem) => item.name !== favoritesItem)]
+                : prevState => [...prevState, item]
+        )
+    }
+    const addToCartView = (item) => {
         axios.post('https://631a621adc236c0b1edd3f63.mockapi.io/cart', item)
-
         setCartItems(
             cartItems.find((cartItem) => cartItem.name === item.name)
                 ? prevState => [...prevState.filter((cartItem) => cartItem.name !== item.name)]
                 : prevState => [...prevState, item]
         )
     }
-    const removeFromCart = (id) => {
+    const removeFromCartBack = (id) => {
         axios.delete(`https://631a621adc236c0b1edd3f63.mockapi.io/cart/${id}`)
-        setCartItems(prevState => prevState.filter(item=>item.id!==id))
-
+        setCartItems(prevState => prevState.filter(item => item.id !== id))
+    }
+    //нужно запихать внутри окна фаворита
+    const removeFromFavoriteBack = (id) => {
+        axios.delete(`https://631a621adc236c0b1edd3f63.mockapi.io/favorite/${id}`)
+        setFavorites(prevState => [prevState.filter(item=>item.id!==id)])
     }
 
-
     return (
-
         <div className="wrapper clear">
-
             {cartOpened && <DrawerCart cartItems={cartItems}
-                                       onClickDelete={removeFromCart}
+                                       onClickDelete={removeFromCartBack}
                                        onClickOverlay={() => setCartOpened(false)}
             />}
 
             <Header onClickCart={() => setCartOpened(true)}/>
 
+            {/*<Route path={'/test'}>123123123123</Route>*/}
             <div className="content p-40">
                 <div className={'d-flex align-center mb-40 justify-between mr-25 ml-25'}>
                     <h1>{searchInput ? `Поиск по запросу: "${searchInput}"` : "Все кроссовки"}</h1>
@@ -81,8 +93,8 @@ function App() {
                                 name={name}
                                 price={price}
                                 src={src}
-                                onClickFavorite={() => console.log('favorite')}
-                                onClickPlus={() => addToCart({name, price, src})}
+                                onClickFavorite={() => addToFavoriteView({name, price, src})}
+                                onClickPlus={() => addToCartView({name, price, src})}
                             />)
                     }
                 </div>
