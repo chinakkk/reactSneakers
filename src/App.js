@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import {Route} from 'react-router-dom';
+import {Route, Routes} from "react-router-dom";
 import Card from "./components/Card/Card";
 import Header from "./components/Header";
 import DrawerCart from "./components/DrawerCart";
@@ -71,7 +71,10 @@ function App() {
 
             <Header onClickCart={() => setCartOpened(true)}/>
 
-            {/*<Route path={'/test'}>123123123123</Route>*/}
+            <Routes>
+                <Route path='favorite' element={<Card />}/>
+            </Routes>
+
             <div className="content p-40">
                 <div className={'d-flex align-center mb-40 justify-between mr-25 ml-25'}>
                     <h1>{searchInput ? `Поиск по запросу: "${searchInput}"` : "Все кроссовки"}</h1>
