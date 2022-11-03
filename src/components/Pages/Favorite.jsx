@@ -10,11 +10,10 @@ const Favorite = ({favorite=[],removeFromFavoriteBack}) => {
                     favorite
                     .map((item, index, obj) =>
                         <Card
+                            isFavoriteProps={true}
                             key={index}
-                            name={item.name}
-                            price={item.price}
-                            src={item.src}
-                            onClickFavorite={() => removeFromFavoriteBack(item.id)}
+                            onClickFavoriteProps={() => removeFromFavoriteBack(item.id)}
+                            {...item}
                         />)
                 }
             </div>

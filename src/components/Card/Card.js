@@ -2,16 +2,16 @@ import {forwardRef} from "react";
 import React from "react";
 import style from './Card.module.scss'
 
-const Card=(props)=>{
+const Card=({onClickPlusProps,onClickFavoriteProps,id,src,name,price,isFavoriteProps=false})=>{
 
     const [isAdded,setIsAdded]=React.useState(false)
-    const [isFavorite,setIsFavorite]=React.useState(false)
+    const [isFavorite,setIsFavorite]=React.useState(isFavoriteProps)
     const onClickPlus=()=>{
-        props.onClickPlus()
+        onClickPlusProps()
         setIsAdded(!isAdded)
     }
     const onClickFavorite=()=>{
-        props.onClickFavorite()
+        onClickFavoriteProps()
         setIsFavorite(!isFavorite)
     }
 
@@ -21,12 +21,12 @@ const Card=(props)=>{
                 <div className={style.favorite}>
                     <img onClick={onClickFavorite} src={`./img/btnHeart${isFavorite?'1':'0'}.svg`} alt="Like"/>
                 </div>
-                <img width={133} height={112} src={props.src} alt={'Sneakers'}/>
-                <h5>{props.name}</h5>
+                <img width={133} height={112} src={src} alt={'Sneakers'}/>
+                <h5>{name}</h5>
                 <div className={style.cardBottom+` d-flex justify-between align-center`}>
                     <div className={'d-flex flex-column'}>
                         <p>Цена</p>
-                        <b>{props.price} р.</b>
+                        <b>{price} р.</b>
                     </div>
                     <img className={'d-flex align-center m-5 cu-p'} src={'./img/btn'+(isAdded?'Added':'Plus')+'.svg'} onClick={onClickPlus} />
                 </div>

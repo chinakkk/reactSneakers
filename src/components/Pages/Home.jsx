@@ -24,14 +24,15 @@ const Home = ({
             <div className={'d-flex flex-wrap'}>
                 {items
                     .filter(item => item.name.toLowerCase().includes(searchInput.toLowerCase()))
-                    .map(({name, price, src}, index, obj) =>
+                    .map((item, index) =>
                         <Card
+
                             key={index}
-                            name={name}
-                            price={price}
-                            src={src}
-                            onClickFavorite={() => addToFavoriteView({name, price, src})}
-                            onClickPlus={() => addToCartView({name, price, src})}
+                            name={item.name}
+                            price={item.price}
+                            src={item.src}
+                            onClickFavoriteProps={() => addToFavoriteView(item)}
+                            onClickPlusProps={() => addToCartView(item)}
                         />)
                 }
             </div>
