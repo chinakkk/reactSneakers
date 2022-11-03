@@ -30,47 +30,46 @@ function App() {
 
     }, [])
 
-    const onClickAddToCart = (item) => {
-
-        if (cartItems.find((cartItem) => cartItem.name === item.name)) {
-            removeFromCartBack(cartItems.find((cartItem) => cartItem.name === item.name).id)
-        } else {
-            axios.post(`https://631a621adc236c0b1edd3f63.mockapi.io/cart`, item)
-            setCartItems(prevState => [...prevState, item])
-        }
-        console.log(cartItems)
-    }
-    // const onClickAddToCart = (item) => {
-    //     axios.post('https://631a621adc236c0b1edd3f63.mockapi.io/cart', item)
-    //     setCartItems(
-    //         cartItems.find((cartItem) => cartItem.name === item.name)
-    //             ? prevState => [...prevState.filter((cartItem) => cartItem.name !== item.name)]
+    // const addToFavoriteView = (item) => {
+    //     axios.post('https://631a621adc236c0b1edd3f63.mockapi.io/favorite', item)
+    //     setFavoriteItems(
+    //         favorite.find((favoriteItem) => favoriteItem === item.name)
+    //             ? prevState => [...prevState.filter((favoriteItem) => item.name !== favoriteItem)]
     //             : prevState => [...prevState, item]
     //     )
     // }
-    const addToFavoriteView = (item) => {
-        axios.post('https://631a621adc236c0b1edd3f63.mockapi.io/favorite', item)
-        setFavoriteItems(
-            favorite.find((favoriteItem) => favoriteItem === item.name)
-                ? prevState => [...prevState.filter((favoriteItem) => item.name !== favoriteItem)]
-                : prevState => [...prevState, item]
-        )
-    }
-
-    const removeFromCartBack = (id) => {
+    //
+    const removeFromDrawerCart = (id) => {
         axios.delete(`https://631a621adc236c0b1edd3f63.mockapi.io/cart/${id}`)
-        setCartItems(prevState => prevState.filter(item => item.id !== id))
+        setCartItems(prevState => [...prevState.filter(item => item.id !== id)])
     }
-    //нужно запихать внутри окна фаворита
     const removeFromFavoriteBack = (id) => {
         axios.delete(`https://631a621adc236c0b1edd3f63.mockapi.io/favorite/${id}`)
-        setFavoriteItems(prevState => [prevState.filter(item => item.id !== id)])
+        setFavoriteItems(prevState => [...prevState.filter(item => item.id !== id)])
     }
 
+    const onClickAddToCart = async (item) => {
+
+        const foundItem=cartItems.find((cartItem) => cartItem.name === item.name)
+        if (foundItem) {
+            removeFromDrawerCart(foundItem.id)
+        } else {
+            const {data} = await axios.post(`https://631a621adc236c0b1edd3f63.mockapi.io/cart`, item)
+            setCartItems(prevState => [...prevState, data])
+        }
+    }
+    const onClickAddToFavorite = async (item) => {
+        if (favorite.find((favoriteItem) => favoriteItem.id === item.id)) {
+            axios.delete(`https://631a621adc236c0b1edd3f63.mockapi.io/favorite/${item.id}`)
+        } else {
+            const {data} = await axios.post('https://631a621adc236c0b1edd3f63.mockapi.io/favorite', item)
+            setFavoriteItems(prevState => [...prevState, data])
+        }
+    }
     return (
         <div className="wrapper clear">
             {cartOpened && <DrawerCart cartItems={cartItems}
-                                       onClickDelete={removeFromCartBack}
+                                       onClickDelete={removeFromDrawerCart}
                                        onClickOverlay={() => setCartOpened(false)}
             />}
 
@@ -79,11 +78,12 @@ function App() {
             <Routes>
                 <Route path={'/'} element={
                     <Home
+                        cartItems={cartItems}
                         searchInput={searchInput}
                         setSearchInput={setSearchInput}
                         items={items}
-                        addToFavoriteView={addToFavoriteView}
-                        addToCartView={onClickAddToCart}
+                        onClickAddToFavorite={onClickAddToFavorite}
+                        onClickAddToCart={onClickAddToCart}
                     />
                 }/>
                 <Route path='/favorite' element={

@@ -5,8 +5,9 @@ const Home = ({
                   searchInput,
                   setSearchInput,
                   items,
-                  addToFavoriteView,
-                  addToCartView
+                  onClickAddToFavorite,
+                  onClickAddToCart,
+                  cartItems
               }) => {
     return (
         <div className="content p-40">
@@ -24,16 +25,22 @@ const Home = ({
             <div className={'d-flex flex-wrap'}>
                 {items
                     .filter(item => item.name.toLowerCase().includes(searchInput.toLowerCase()))
-                    .map((item, index) =>
-                        <Card
+                    .map((item, index) => {
+                        let isAdded=false
+                        if (cartItems.find((cartItem) => cartItem.name===item.name)) isAdded=true
+                            return (
+                                <Card
 
-                            key={index}
-                            name={item.name}
-                            price={item.price}
-                            src={item.src}
-                            onClickFavoriteProps={() => addToFavoriteView(item)}
-                            onClickPlusProps={() => addToCartView(item)}
-                        />)
+                                    isAddedProps={isAdded}
+                                    key={index}
+                                    name={item.name}
+                                    price={item.price}
+                                    src={item.src}
+                                    onClickFavoriteProps={() => onClickAddToFavorite(item)}
+                                    onClickPlusProps={() => onClickAddToCart(item)}
+                                />
+                            )
+                    })
                 }
             </div>
         </div>
