@@ -37,6 +37,7 @@ const Home = ({
                                     src={item.src}
                                     onClickFavoriteProps={() => onClickAddToFavorite(item)}
                                     onClickPlusProps={() => onClickAddToCart(item)}
+                                    isLoading={false}
                                 />
                             )
                     })

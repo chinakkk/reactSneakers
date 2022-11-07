@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import ContentLoader from "react-content-loader";
 import {Route, Routes} from "react-router-dom";
 import Header from "./components/Header";
 import DrawerCart from "./components/DrawerCart";
