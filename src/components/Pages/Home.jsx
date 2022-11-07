@@ -7,7 +7,8 @@ const Home = ({
                   items,
                   onClickAddToFavorite,
                   onClickAddToCart,
-                  cartItems
+                  cartItems,
+                  favoriteItems
               }) => {
     return (
         <div className="content p-40">
@@ -26,12 +27,10 @@ const Home = ({
                 {items
                     .filter(item => item.name.toLowerCase().includes(searchInput.toLowerCase()))
                     .map((item, index) => {
-                        let isAdded=false
-                        if (cartItems.find((cartItem) => cartItem.name===item.name)) isAdded=true
                             return (
                                 <Card
-
-                                    isAddedProps={isAdded}
+                                    addedInFavorite={favoriteItems.some((favoriteItem) => favoriteItem.name===item.name )}
+                                    addedInCart={cartItems.some((cartItem) => cartItem.name===item.name)}
                                     key={index}
                                     name={item.name}
                                     price={item.price}

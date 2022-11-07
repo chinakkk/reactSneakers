@@ -1,4 +1,5 @@
 import {logDOM} from "@testing-library/react";
+import CartCard from "./DrawerCard/CartCard";
 
 const DrawerCart = ({onClickDelete, onClickOverlay, cartItems = []}) => {
     return (
@@ -14,21 +15,13 @@ const DrawerCart = ({onClickDelete, onClickOverlay, cartItems = []}) => {
                 <div className="cartItems">
 
                     {cartItems.length > 0 ?
-                        cartItems.map((item) => {
+                        cartItems.map((item,index) => {
                         return (
-                            <div className={'cartItem d-flex align-center'}>
-                                <img className={'mb-20 mr-20'} height={70} width={70} src={item.src}
-                                     alt="SneakersCard"/>
-                                <div>
-                                    <p className={'mb-5 mr-20'}>{item.name}</p>
-                                    <b>{item.price} руб.</b>
-                                </div>
-
-                                <img onClick={() => onClickDelete(item.id)}
-                                     className={'button cartRemoveButton'}
-                                     src="./img/btnKrest.svg"
-                                     alt="Krest"/>
-                            </div>
+                            <CartCard
+                                key={index}
+                                item={item}
+                                onClickDelete={onClickDelete}
+                            />
                         )
                     }) : <div className={'cartIsClear'}>
                             <h2>Корзина пуста</h2>

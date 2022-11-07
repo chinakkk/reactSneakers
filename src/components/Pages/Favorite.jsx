@@ -1,20 +1,20 @@
 import Card from "../Card/Card";
 import React from "react";
 
-const Favorite = ({favorite = [], removeFromFavoriteBack}) => {
+const Favorite = ({favoriteItems = [], onClickAddToFavorite, onClickAddToCart}) => {
     return (
         <div className="content p-40">
             <h1>Избранное</h1>
             <div className={'d-flex flex-wrap'}>
                 {
-                    favorite
+                    favoriteItems
                         .map((item, index, obj) => {
-                            console.log(item.id)
                                 return (
                                     <Card
-                                        isFavoriteProps={true}
+                                        addedInFavorite
                                         key={index}
-                                        onClickFavoriteProps={() => removeFromFavoriteBack(item.id)}
+                                        onClickFavoriteProps={() => onClickAddToFavorite(item, true)}
+                                        onClickPlusProps={() => onClickAddToCart(item)}
                                         {...item}
                                     />)
                             }

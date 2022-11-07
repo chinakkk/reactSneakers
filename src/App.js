@@ -12,59 +12,59 @@ function App() {
     const [cartItems, setCartItems] = React.useState([])
     const [searchInput, setSearchInput] = React.useState('')
     const [items, setItems] = React.useState([])
-    const [favorite, setFavoriteItems] = React.useState([])
+    const [favoriteItems, setFavoriteItems] = React.useState([])
 
 
     React.useEffect(() => {
+        const responsed = async () => {
+            const cartRes=await axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/cart')
+            const favoriteRes=await axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/favorite')
+            const itemsRes=await axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/items')
 
-        axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/items').then(res => {
-            setItems(res.data)
-        })
-        axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/cart').then(res => {
-            setCartItems(res.data)
-        })
-        axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/favorite').then(res => {
-            setFavoriteItems(res.data)
-        })
-
-
+            setCartItems(cartRes.data)
+            setFavoriteItems(favoriteRes.data)
+            setItems(itemsRes.data)
+        }
+        responsed()
     }, [])
 
-    // const addToFavoriteView = (item) => {
-    //     axios.post('https://631a621adc236c0b1edd3f63.mockapi.io/favorite', item)
-    //     setFavoriteItems(
-    //         favorite.find((favoriteItem) => favoriteItem === item.name)
-    //             ? prevState => [...prevState.filter((favoriteItem) => item.name !== favoriteItem)]
-    //             : prevState => [...prevState, item]
-    //     )
-    // }
-    //
     const removeFromDrawerCart = (id) => {
         axios.delete(`https://631a621adc236c0b1edd3f63.mockapi.io/cart/${id}`)
         setCartItems(prevState => [...prevState.filter(item => item.id !== id)])
     }
-    const removeFromFavoriteBack = (id) => {
-        axios.delete(`https://631a621adc236c0b1edd3f63.mockapi.io/favorite/${id}`)
-        setFavoriteItems(prevState => [...prevState.filter(item => item.id !== id)])
-    }
 
     const onClickAddToCart = async (item) => {
 
-        const foundItem=cartItems.find((cartItem) => cartItem.name === item.name)
-        if (foundItem) {
-            removeFromDrawerCart(foundItem.id)
-        } else {
-            const {data} = await axios.post(`https://631a621adc236c0b1edd3f63.mockapi.io/cart`, item)
-            setCartItems(prevState => [...prevState, data])
+        try {
+            const foundedItem = cartItems.find((cartItem) => cartItem.name === item.name)
+            if (foundedItem) {
+                removeFromDrawerCart(foundedItem.id)
+            } else {
+                const {data} = await axios.post(`https://631a621adc236c0b1edd3f63.mockapi.io/cart`, item)
+                setCartItems(prevState => [...prevState, data])
+            }
+        } catch (error) {
+            alert('Не удалось добавить в корзину')
         }
+
+
     }
-    const onClickAddToFavorite = async (item) => {
-        if (favorite.find((favoriteItem) => favoriteItem.id === item.id)) {
-            axios.delete(`https://631a621adc236c0b1edd3f63.mockapi.io/favorite/${item.id}`)
-        } else {
-            const {data} = await axios.post('https://631a621adc236c0b1edd3f63.mockapi.io/favorite', item)
-            setFavoriteItems(prevState => [...prevState, data])
+
+    const onClickAddToFavorite = async (item, inFavoritePage = false) => {
+        try {
+            const foundedItem = favoriteItems.find((favoriteItem) => favoriteItem.name === item.name)
+            if (foundedItem) {
+                axios.delete(`https://631a621adc236c0b1edd3f63.mockapi.io/favorite/${foundedItem.id}`)
+                if (!inFavoritePage) setFavoriteItems(prevState => [...prevState.filter(item => item.name !== foundedItem.name)])
+
+            } else {
+                const {data} = await axios.post('https://631a621adc236c0b1edd3f63.mockapi.io/favorite', item)
+                setFavoriteItems(prevState => [...prevState, data])
+            }
+        } catch (error) {
+            alert('Товар не добавился в Favorites')
         }
+
     }
     return (
         <div className="wrapper clear">
@@ -79,6 +79,7 @@ function App() {
                 <Route path={'/'} element={
                     <Home
                         cartItems={cartItems}
+                        favoriteItems={favoriteItems}
                         searchInput={searchInput}
                         setSearchInput={setSearchInput}
                         items={items}
@@ -88,14 +89,12 @@ function App() {
                 }/>
                 <Route path='/favorite' element={
                     <Favorite
-                        favorite={favorite}
-                        removeFromFavoriteBack={removeFromFavoriteBack}
-
+                        favoriteItems={favoriteItems}
+                        onClickAddToFavorite={onClickAddToFavorite}
+                        onClickAddToCart={onClickAddToCart}
                     />
                 }/>
             </Routes>
-
-
         </div>
 
     );

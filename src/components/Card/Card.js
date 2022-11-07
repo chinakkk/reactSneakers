@@ -9,12 +9,13 @@ const Card = ({
                   src,
                   name,
                   price,
-                  isFavoriteProps = false,
-                  isAddedProps = false
+                  addedInFavorite = false,
+                  addedInCart = false,
+
               }) => {
 
-    const [isAdded, setIsAdded] = React.useState(isAddedProps)
-    const [isFavorite, setIsFavorite] = React.useState(isFavoriteProps)
+    const [isAdded, setIsAdded] = React.useState(addedInCart)
+    const [isFavorite, setIsFavorite] = React.useState(addedInFavorite)
     const onClickPlus = () => {
         onClickPlusProps()
         setIsAdded(!isAdded)
