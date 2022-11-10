@@ -8,8 +8,31 @@ const Home = ({
                   onClickAddToFavorite,
                   onClickAddToCart,
                   cartItems,
-                  favoriteItems
+                  favoriteItems,
+                  isLoading
               }) => {
+
+    const renderItems = () => {
+        const filterItems = items.filter(item => item.name.toLowerCase().includes(searchInput.toLowerCase()))
+
+        return ((isLoading ? [...Array(8)] : filterItems).map((item, index) => {
+
+            // console.log(cartItems.some((cartItem) => cartItem.name === item.name))
+
+            return (
+                    <Card
+                        {...item}
+                        key={index}
+                        onClickFavoriteProps={() => onClickAddToFavorite(item)}
+                        onClickPlusProps={() => onClickAddToCart(item)}
+                        addedInFavorite={favoriteItems.some((favoriteItem) => favoriteItem.name === item.name)}
+                        addedInCart={cartItems.some((cartItem) => cartItem.name === item.name)}
+                        isLoading={isLoading}
+                    />)
+            }
+        ))
+
+    }
     return (
         <div className="content p-40">
             <div className={'d-flex align-center mb-40 justify-between mr-25 ml-25'}>
@@ -24,24 +47,7 @@ const Home = ({
             </div>
 
             <div className={'d-flex flex-wrap'}>
-                {items
-                    .filter(item => item.name.toLowerCase().includes(searchInput.toLowerCase()))
-                    .map((item, index) => {
-                            return (
-                                <Card
-                                    addedInFavorite={favoriteItems.some((favoriteItem) => favoriteItem.name===item.name )}
-                                    addedInCart={cartItems.some((cartItem) => cartItem.name===item.name)}
-                                    key={index}
-                                    name={item.name}
-                                    price={item.price}
-                                    src={item.src}
-                                    onClickFavoriteProps={() => onClickAddToFavorite(item)}
-                                    onClickPlusProps={() => onClickAddToCart(item)}
-                                    isLoading={false}
-                                />
-                            )
-                    })
-                }
+                {renderItems()}
             </div>
         </div>
     )
