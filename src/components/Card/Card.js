@@ -2,6 +2,7 @@ import {forwardRef} from "react";
 import React from "react";
 import style from './Card.module.scss'
 import ContentLoader from "react-content-loader";
+import {logDOM} from "@testing-library/react";
 
 const Card = ({
                   onClickPlusProps,
@@ -15,7 +16,8 @@ const Card = ({
                   isLoading
               }) => {
 
-    console.log(addedInCart)
+    addedInCart&&console.log('addedInCart')
+
     const [isAdded, setIsAdded] = React.useState(addedInCart)
     const [isFavorite, setIsFavorite] = React.useState(addedInFavorite)
     const onClickPlus = () => {
@@ -26,11 +28,12 @@ const Card = ({
         onClickFavoriteProps()
         setIsFavorite(!isFavorite)
     }
-
     return (
         <div className={'mr-20 ml-20 mb-40'}>
             <div className={style.card}>
+                {isAdded&&console.log('true')}
                 {
+
                     isLoading ?
                         <ContentLoader
                             speed={2}

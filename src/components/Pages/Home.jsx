@@ -15,10 +15,7 @@ const Home = ({
     const renderItems = () => {
         const filterItems = items.filter(item => item.name.toLowerCase().includes(searchInput.toLowerCase()))
 
-        return ((isLoading ? [...Array(8)] : filterItems).map((item, index) => {
-
-            // console.log(cartItems.some((cartItem) => cartItem.name === item.name))
-
+        return ((isLoading ? [...Array(4)] : filterItems).map((item, index) => {
             return (
                     <Card
                         {...item}
