@@ -1,7 +1,9 @@
 import Card from "../components/Card/Card";
-import ContentLoader from "react-content-loader";
+import style from '../components/Card/Card.module.scss'
+
 
 import React from "react";
+import SkeletCard from "../components/Card/SkeletCard";
 
 const Home = ({
                   searchInput,
@@ -16,8 +18,14 @@ const Home = ({
 
     const renderItems = () => {
         const filterItems = items.filter(item => item.name.toLowerCase().includes(searchInput.toLowerCase()))
-        return ((isLoading?[...Array(4)]:filterItems)
-            .map((item, index) =>
+        return (isLoading ? ([...Array(4)].map((value,index) =>
+                <SkeletCard
+                    key={index}
+                />
+            )
+        ) : (
+            filterItems
+                .map((item, index) =>
                     <Card
                         {...item}
                         key={index}
@@ -27,9 +35,7 @@ const Home = ({
                         addedInCart={cartItems.some((cartItem) => cartItem.name === item.name)}
                         isLoading={isLoading}
                     />
-
-        ))
-//(isLoading ? [...Array(4)] :
+                )))
     }
     return (
         <div className="content p-40">

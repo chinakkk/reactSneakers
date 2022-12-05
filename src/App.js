@@ -24,8 +24,8 @@ function App() {
 
             const itemsRes = await axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/items')
             const cartRes = await axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/cart')
-            setIsLoading(false)
             const favoriteRes = await axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/favorite')
+            setIsLoading(false)
 
             setCartItems(cartRes.data)
             setFavoriteItems(favoriteRes.data)
