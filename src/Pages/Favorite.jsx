@@ -1,7 +1,10 @@
-import Card from "../Card/Card";
+import Card from "../components/Card/Card";
 import React from "react";
+import AppContext from "../AppContext";
 
-const Favorite = ({favoriteItems = [], onClickAddToFavorite, onClickAddToCart}) => {
+const Favorite = ({onClickAddToFavorite, onClickAddToCart}) => {
+    const {favoriteItems} = React.useContext(AppContext)
+
     return (
         <div className="content p-40">
             <h1>Избранное</h1>

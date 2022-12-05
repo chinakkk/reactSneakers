@@ -4,9 +4,10 @@ import ContentLoader from "react-content-loader";
 import {Route, Routes} from "react-router-dom";
 import Header from "./components/Header";
 import DrawerCart from "./components/DrawerCart";
-import Home from "./components/Pages/Home";
-import Favorite from "./components/Pages/Favorite";
+import Home from "./Pages/Home";
+import Favorite from "./Pages/Favorite";
 import {logDOM} from "@testing-library/react";
+import AppContext from "./AppContext";
 
 function App() {
     const [cartOpened, setCartOpened] = React.useState(false)
@@ -16,24 +17,22 @@ function App() {
     const [favoriteItems, setFavoriteItems] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
 
-    const AppContext = React.createContext({})
 
     React.useEffect(() => {
-        const responsed = async () => {
+        const responded = async () => {
+
 
             const itemsRes = await axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/items')
             const cartRes = await axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/cart')
-            const favoriteRes = await axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/favorite')
             setIsLoading(false)
-
+            const favoriteRes = await axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/favorite')
 
             setCartItems(cartRes.data)
             setFavoriteItems(favoriteRes.data)
             setItems(itemsRes.data)
 
-
         }
-        responsed()
+        responded()
     }, [])
 
     const removeFromDrawerCart = (id) => {
@@ -75,7 +74,7 @@ function App() {
     }
     return (
 
-        <AppContext.Provider>
+        <AppContext.Provider value={{cartItems,favoriteItems}}>
             <div className="wrapper clear">
                 {cartOpened && <DrawerCart cartItems={cartItems}
                                            onClickDelete={removeFromDrawerCart}
