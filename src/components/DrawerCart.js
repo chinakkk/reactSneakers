@@ -1,7 +1,11 @@
 import {logDOM} from "@testing-library/react";
 import CartCard from "./DrawerCard/CartCard";
+import AppContext from "../AppContext";
+import React from "react";
 
-const DrawerCart = ({onClickDelete, onClickOverlay, cartItems = []}) => {
+const DrawerCart = ({onClickDelete, onClickOverlay}) => {
+    const {cartItems}=React.useContext(AppContext)
+
     return (
         <div className="overlay d-flex">
             <div className={'cartGray'} onClick={onClickOverlay}></div>

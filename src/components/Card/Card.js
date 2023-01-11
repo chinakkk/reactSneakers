@@ -9,7 +9,6 @@ const Card = ({
                   price,
                   addedInFavorite = false,
                   addedInCart = false,
-                  isLoading
               }) => {
 
 
@@ -19,11 +18,11 @@ const Card = ({
         onClickPlusProps()
         setIsAdded(!isAdded)
     }
+
     const onClickFavorite = () => {
         onClickFavoriteProps()
         setIsFavorite(!isFavorite)
     }
-    // isAdded?console.log('в корзине'):console.log('не в корзине')
     return (
         <div className={style.card}>
             <div className={style.favorite}>

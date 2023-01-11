@@ -38,7 +38,6 @@ function App() {
     const removeFromDrawerCart = (id) => {
         axios.delete(`https://631a621adc236c0b1edd3f63.mockapi.io/cart/${id}`)
         setCartItems(prevState => [...prevState.filter(item => item.id !== id)])
-
     }
 
     const onClickAddToCart = async (item) => {
@@ -76,8 +75,7 @@ function App() {
 
         <AppContext.Provider value={{cartItems,favoriteItems}}>
             <div className="wrapper clear">
-                {cartOpened && <DrawerCart cartItems={cartItems}
-                                           onClickDelete={removeFromDrawerCart}
+                {cartOpened && <DrawerCart onClickDelete={removeFromDrawerCart}
                                            onClickOverlay={() => setCartOpened(false)}
                 />}
 
@@ -85,6 +83,7 @@ function App() {
 
                 <Routes>
                     <Route path={'/'} element={
+
                         <Home
                             cartItems={cartItems}
                             favoriteItems={favoriteItems}
@@ -98,7 +97,7 @@ function App() {
                     }/>
                     <Route path='/favorite' element={
                         <Favorite
-                            favoriteItems={favoriteItems}
+                            // favoriteItems={favoriteItems} в контексте
                             onClickAddToFavorite={onClickAddToFavorite}
                             onClickAddToCart={onClickAddToCart}
                         />
