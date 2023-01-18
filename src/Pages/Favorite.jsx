@@ -14,6 +14,7 @@ const Favorite = ({onClickAddToFavorite, onClickAddToCart}) => {
                     favoriteItems.length>0? favoriteItems
                         .map((item, index, obj) => {
                                 return (
+
                                     <Card
                                         addedInFavorite
                                         key={index}

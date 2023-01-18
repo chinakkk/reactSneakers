@@ -23,7 +23,7 @@ function App() {
     const onClickCreateOrder = async () => {
         try {
             const {data} = await axios.post(`https://63c1bc2b376b9b2e648305db.mockapi.io/order`, {
-                items:[...cartItems]
+                items: [...cartItems]
             })
             setCartItems(prevState => [...prevState, data])
             setCartItems([])
@@ -31,9 +31,12 @@ function App() {
             setOrderId(data.id)
             setOrderIsCreated(true)
 
+            for (let i = 0; i < cartItems.length; i++) {
+                await axios.delete(`https://631a621adc236c0b1edd3f63.mockapi.io/cart/${cartItems[i].id}`)
 
-        }
-        catch (error){
+            }
+
+        } catch (error) {
             alert('Не удалось создать заказ')
         }
     }
