@@ -1,5 +1,7 @@
 import React from "react";
 import style from './Card.module.scss'
+import AppContext from "../../AppContext";
+
 
 const Card = ({
                   onClickPlusProps,
@@ -8,25 +10,27 @@ const Card = ({
                   name,
                   price,
                   addedInFavorite = false,
-                  addedInCart = false,
+                  inFavorite = false
               }) => {
 
 
-    const [isAdded, setIsAdded] = React.useState(addedInCart)
-    const [isFavorite, setIsFavorite] = React.useState(addedInFavorite)
+    const {itemIsAdded} = React.useContext(AppContext)
+    const [addedInCart, setAddedInCart] = React.useState(itemIsAdded(name))
+    const [isAddedInFavorite, setIsAddedInFavorite] = React.useState(addedInFavorite)
     const onClickPlus = () => {
         onClickPlusProps()
-        setIsAdded(!isAdded)
+        setAddedInCart(!addedInCart)
     }
 
     const onClickFavorite = () => {
         onClickFavoriteProps()
-        setIsFavorite(!isFavorite)
+        setIsAddedInFavorite(!isAddedInFavorite)
     }
     return (
         <div className={style.card}>
             <div className={style.favorite}>
-                <img onClick={onClickFavorite} src={`./img/btnHeart${isFavorite ? '1' : '0'}.svg`}
+                <img onClick={onClickFavorite}
+                     src={`./img/btnHeart${(inFavorite || isAddedInFavorite) ? '1' : '0'}.svg`}
                      alt="Like"/>
             </div>
             <img width={133} height={112} src={src} alt={'Sneakers'}/>
@@ -37,8 +41,9 @@ const Card = ({
                     <b>{price} р.</b>
                 </div>
                 <img className={'d-flex align-center m-5 cu-p'}
-                     src={'./img/btn' + (isAdded ? 'Added' : 'Plus') + '.svg'} onClick={onClickPlus}/>
+                     src={'./img/btn' + ((itemIsAdded(name)) ? 'Added' : 'Plus') + '.svg'} onClick={onClickPlus}/>
             </div>
+
         </div>
 
     )

@@ -1,9 +1,10 @@
 import {logDOM} from "@testing-library/react";
-import CartCard from "./DrawerCard/CartCard";
-import AppContext from "../AppContext";
+import CartCard from "./CartCard";
+import AppContext from "../../AppContext";
 import React from "react";
+import Massage from "../Massage";
 
-const DrawerCart = ({onClickDelete, onClickOverlay}) => {
+const DrawerCart = ({onClickDelete, onClickOverlay,onClickCreateOrder,orderIsCreated,orderId}) => {
     const {cartItems}=React.useContext(AppContext)
 
     return (
@@ -27,10 +28,15 @@ const DrawerCart = ({onClickDelete, onClickOverlay}) => {
                                 onClickDelete={onClickDelete}
                             />
                         )
-                    }) : <div className={'cartIsClear'}>
-                            <h2>Корзина пуста</h2>
-                            <button onClick={onClickOverlay}>Вернуться назад</button>
+                    }) : <div className={'mt-50'}>
+                            <Massage
+                                imgSrc={orderIsCreated?'./img/orderCreate.png':"./img/emptyCart.png"}
+                                title={orderIsCreated?'Заказ оформлен':'Корзина пустая'}
+                                text={orderIsCreated?`Ваш заказ #${orderId} скоро будет передан курьерской доставке`:'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'}
+                                onClickFunction={onClickOverlay}
+                            />
                         </div>
+
                     }
 
                 </div>
@@ -46,7 +52,7 @@ const DrawerCart = ({onClickDelete, onClickOverlay}) => {
                         <b>2000р</b>
                     </li>
                 </ul>
-                <img className={'createOrderButton button'} src="./img/btnCreateOrder.svg" alt="CreateOrder"/>
+                <img onClick={onClickCreateOrder} className={'createOrderButton button'} src="./img/btnCreateOrder.svg" alt="CreateOrder"/>
 
             </div>
         </div>

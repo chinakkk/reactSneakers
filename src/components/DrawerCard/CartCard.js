@@ -1,4 +1,10 @@
 const CartCard = ({item, onClickDelete}) => {
+
+    const onClickCross = (item) => {
+        onClickDelete(item.id)
+
+    }
+
     return (
         <div className={'cartItem d-flex align-center'}>
             <img className={'mb-20 mr-20'} height={70} width={70} src={item.src}
@@ -8,7 +14,7 @@ const CartCard = ({item, onClickDelete}) => {
                 <b>{item.price} руб.</b>
             </div>
 
-            <img onClick={() => onClickDelete(item.id)}
+            <img onClick={() => onClickCross(item)}
                  className={'button cartRemoveButton'}
                  src="./img/btnKrest.svg"
                  alt="Krest"/>

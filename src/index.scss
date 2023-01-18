@@ -90,31 +90,45 @@ header {
   flex: 1;
   overflow: auto;
   margin-bottom: 20px;
-  .cartIsClear{
-    text-align: center;
-    margin-top: 100px;
-    button{
-      margin-top: 30px;
-      width: 200px;
-      height: 30px;
 
-      background-color: #9DD458;
-      border: 0 solid;
-      color: white;
-      font-size: 16px;
-      font-weight: 600;
-      border-radius: 9px;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      transition: opacity 0.2s ease-in-out;
-      &:hover{
-        opacity: 0.8;
-      }
+}
+.cartIsClear{
+  flex: 1;
+  overflow: auto;
+  text-align: center;
+  margin: auto auto;
+  img{
+    height: 100px;
+  }
+  h2{
+    font-weight: 600;
+  }
+  h4{
+    opacity: 0.5;
+    font-weight: 500;
+    font-size: 17px;
+  }
+  button{
+    margin-top: 10px;
+    width: 200px;
+    height: 40px;
 
+    background-color: #9DD458;
+    border: 0 solid;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: opacity 0.2s ease-in-out;
+    &:hover{
+      opacity: 0.8;
     }
 
-
   }
+
+
 }
 
 .createOrderButton {

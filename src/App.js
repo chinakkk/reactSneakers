@@ -3,7 +3,7 @@ import axios from "axios";
 import ContentLoader from "react-content-loader";
 import {Route, Routes} from "react-router-dom";
 import Header from "./components/Header";
-import DrawerCart from "./components/DrawerCart";
+import DrawerCart from "./components/DrawerCard/DrawerCart";
 import Home from "./Pages/Home";
 import Favorite from "./Pages/Favorite";
 import {logDOM} from "@testing-library/react";
@@ -16,6 +16,27 @@ function App() {
     const [items, setItems] = React.useState([])
     const [favoriteItems, setFavoriteItems] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
+    const [orderIsCreated, setOrderIsCreated] = React.useState(false)
+    const [orderId, setOrderId] = React.useState(1)
+
+
+    const onClickCreateOrder = async () => {
+        try {
+            const {data} = await axios.post(`https://63c1bc2b376b9b2e648305db.mockapi.io/order`, {
+                items:[...cartItems]
+            })
+            setCartItems(prevState => [...prevState, data])
+            setCartItems([])
+
+            setOrderId(data.id)
+            setOrderIsCreated(true)
+
+
+        }
+        catch (error){
+            alert('Не удалось создать заказ')
+        }
+    }
 
 
     React.useEffect(() => {
@@ -71,12 +92,19 @@ function App() {
         }
 
     }
+
+    const itemIsAdded = (name) => {
+        return cartItems.some((cartItem) => cartItem.name === name)
+    }
     return (
 
-        <AppContext.Provider value={{cartItems,favoriteItems}}>
+        <AppContext.Provider value={{cartItems, favoriteItems, itemIsAdded}}>
             <div className="wrapper clear">
                 {cartOpened && <DrawerCart onClickDelete={removeFromDrawerCart}
                                            onClickOverlay={() => setCartOpened(false)}
+                                           onClickCreateOrder={onClickCreateOrder}
+                                           orderIsCreated={orderIsCreated}
+                                           orderId={orderId}
                 />}
 
                 <Header onClickCart={() => setCartOpened(true)}/>

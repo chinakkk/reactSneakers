@@ -1,20 +1,17 @@
 import Card from "../components/Card/Card";
 import style from '../components/Card/Card.module.scss'
-
-
 import React from "react";
 import SkeletCard from "../components/Card/SkeletCard";
-
 const Home = ({
                   searchInput,
                   setSearchInput,
                   items,
                   onClickAddToFavorite,
                   onClickAddToCart,
-                  cartItems,
                   favoriteItems,
                   isLoading
               }) => {
+
 
     const renderItems = () => {
         const filterItems = items.filter(item => item.name.toLowerCase().includes(searchInput.toLowerCase()))
@@ -32,11 +29,12 @@ const Home = ({
                         onClickFavoriteProps={() => onClickAddToFavorite(item)}
                         onClickPlusProps={() => onClickAddToCart(item)}
                         addedInFavorite={favoriteItems.some((favoriteItem) => favoriteItem.name === item.name)}
-                        addedInCart={cartItems.some((cartItem) => cartItem.name === item.name)}
                         isLoading={isLoading}
                     />
                 )))
     }
+
+
     return (
         <div className="content p-40">
             <div className={'d-flex align-center mb-40 justify-between mr-25 ml-25'}>
