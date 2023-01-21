@@ -15,7 +15,7 @@ const Home = ({
 
     const renderItems = () => {
         const filterItems = items.filter(item => item.name.toLowerCase().includes(searchInput.toLowerCase()))
-        return (isLoading ? ([...Array(4)].map((value,index) =>
+        return (isLoading ? ([...Array(8)].map((value,index) =>
                 <SkeletCard
                     key={index}
                 />

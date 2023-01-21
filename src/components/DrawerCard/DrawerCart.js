@@ -1,5 +1,5 @@
 import {logDOM} from "@testing-library/react";
-import CartCard from "./CartCard";
+import DrawerCartCard from "./DrawerCartCard";
 import AppContext from "../../AppContext";
 import React from "react";
 import Massage from "../Massage";
@@ -25,7 +25,7 @@ const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsC
                     {cartItems.length > 0 ?
                         cartItems.map((item, index) => {
                             return (
-                                <CartCard
+                                <DrawerCartCard
                                     key={index}
                                     item={item}
                                     onClickDelete={onClickDelete}

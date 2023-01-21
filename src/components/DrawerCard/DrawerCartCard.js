@@ -1,4 +1,4 @@
-const CartCard = ({item, onClickDelete}) => {
+const DrawerCartCard = ({item, onClickDelete}) => {
 
     const onClickCross = (item) => {
         onClickDelete(item.id)
@@ -21,4 +21,4 @@ const CartCard = ({item, onClickDelete}) => {
         </div>
     )
 }
-export default CartCard;
+export default DrawerCartCard;

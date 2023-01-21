@@ -1,28 +1,39 @@
-import Card from "../../components/Card/Card";
 import React from "react";
 import Massage from "../../components/Massage";
 import axios from "axios";
-import OrderCart from "./OrderCart";
+import Order from "./Order/Order";
 
-const Order = ({onClickAddToFavorite, onClickAddToCart}) => {
+const OrderPage = () => {
 
     const [orderItems,setOrderItems]=React.useState([])
 
     React.useEffect(() => {
         (async () => {
-            const orderRes=await axios.get('https://63c1bc2b376b9b2e648305db.mockapi.io/order')
-            setOrderItems(orderRes.data)
+            try {
+                const orderRes=await axios.get('https://63c1bc2b376b9b2e648305db.mockapi.io/order')
+                setOrderItems(orderRes.data)
+            }
+            catch (error){
+                alert('Не удалось загрузить заказы')
+            }
+
         })()
     },[])
+
+    const onClickDeleteOrder = (id) => {
+        axios.delete(`https://63c1bc2b376b9b2e648305db.mockapi.io/order/${id}`)
+        setOrderItems(prevState => [...prevState.filter(item => item.id !== id)])
+    }
     return (
         <div className="content p-40">
             <h1>Все заказы</h1>
             <div className={'d-flex flex-wrap mt-30'}>
                 {
                     orderItems.length>0?
-                        orderItems.map((item, index, obj) => {
+                        orderItems.map((item, index) => {
                                 return (
-                                    <OrderCart
+                                    <Order
+                                        onClickDeleteOrder={onClickDeleteOrder}
                                         key={index}
                                         orderId={item.id}
                                         item={item.items}
@@ -35,7 +46,7 @@ const Order = ({onClickAddToFavorite, onClickAddToCart}) => {
                             imgSrc={"./img/emptyFavorite.png"}
                             title={'Заказов нет'}
                             text={'Вы еще не совершили заказ'}
-                            onClickFunction={onClickAddToFavorite}
+                            onClickFunction={() => {}}
                         />
 
                 }
@@ -43,4 +54,4 @@ const Order = ({onClickAddToFavorite, onClickAddToCart}) => {
         </div>
     )
 }
-export default Order;
+export default OrderPage;

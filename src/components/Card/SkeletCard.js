@@ -16,8 +16,8 @@ const SkeletCard = () => {
                 <rect x="0" y="0" rx="10" ry="10" width="150" height="90"/>
                 <rect x="0" y="105" rx="3" ry="3" width="150" height="15"/>
                 <rect x="0" y="125" rx="3" ry="3" width="93" height="15"/>
-                <rect x="0" y="155" rx="5" ry="5" width="80" height="25"/>
-                <rect x="118" y="148" rx="5" ry="5" width="32" height="32"/>
+                <rect x="0" y="160" rx="5" ry="5" width="80" height="25"/>
+                <rect x="118" y="160" rx="5" ry="5" width="25" height="25"/>
             </ContentLoader>
 
         </div>

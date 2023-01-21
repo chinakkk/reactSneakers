@@ -8,7 +8,7 @@ import Home from "./Pages/Home";
 import Favorite from "./Pages/Favorite";
 import {logDOM} from "@testing-library/react";
 import AppContext from "./AppContext";
-import Order from "./Pages/Order/Order";
+import OrderPage from "./Pages/OrderPage/OrderPage";
 
 function App() {
     const [cartOpened, setCartOpened] = React.useState(false)
@@ -139,9 +139,7 @@ function App() {
                         />
                     }/>
                     <Route path={'order'} element={
-                        <Order
-                            onClickAddToFavorite={onClickAddToFavorite}
-                            onClickAddToCart={onClickAddToCart}
+                        <OrderPage
                         />
                     }/>
                 </Routes>
