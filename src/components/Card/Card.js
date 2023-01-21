@@ -14,8 +14,8 @@ const Card = ({
               }) => {
 
 
-    const {itemIsAdded} = React.useContext(AppContext)
-    const [addedInCart, setAddedInCart] = React.useState(itemIsAdded(name))
+    const {itemIsAddedCart} = React.useContext(AppContext)
+    const [addedInCart, setAddedInCart] = React.useState(itemIsAddedCart(name))
     const [isAddedInFavorite, setIsAddedInFavorite] = React.useState(addedInFavorite)
     const onClickPlus = () => {
         onClickPlusProps()
@@ -41,7 +41,7 @@ const Card = ({
                     <b>{price} р.</b>
                 </div>
                 <img className={'d-flex align-center m-5 cu-p'}
-                     src={'./img/btn' + ((itemIsAdded(name)) ? 'Added' : 'Plus') + '.svg'} onClick={onClickPlus}/>
+                     src={'./img/btn' + ((itemIsAddedCart(name)) ? 'Added' : 'Plus') + '.svg'} onClick={onClickPlus}/>
             </div>
 
         </div>

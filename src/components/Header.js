@@ -1,7 +1,12 @@
 import {Link} from 'react-router-dom';
 
 
-const Header = (props) => {
+const Header = ({cartItems, onClickCart, setCartPrice}) => {
+
+    const cartPrice = cartItems.reduce((sum, item) => {
+        return sum + Number(item.price)
+    }, 0)
+
     return (
         <header className={'d-flex justify-between p-40'}>
             <Link to='/'>
@@ -15,9 +20,9 @@ const Header = (props) => {
             </Link>
 
             <ul className={'headerRight d-flex align-center mr-30'}>
-                <li className={'mr-20 d-flex align-center cu-p'} onClick={props.onClickCart}>
+                <li className={'mr-20 d-flex align-center cu-p'} onClick={onClickCart}>
                     <img className={'mr-10 button'} width={'18px'} height={'18px'} src={"./img/card.svg"} alt={'Card'}/>
-                    <span>1205p</span>
+                    <span>{cartPrice} руб.</span>
                 </li>
 
                 <li className={'d-flex align-center mr-15'}>
@@ -30,7 +35,9 @@ const Header = (props) => {
                 </li>
 
                 <li className={'d-flex align-center'}>
-                    <img className={'button'} width={'18px'} height={'18px'} src={'./img/user.svg'} alt={'User'}/>
+                    <Link to={'/order'}>
+                        <img className={'button'} width={'18px'} height={'18px'} src={'./img/user.svg'} alt={'User'}/>
+                    </Link>
                 </li>
 
             </ul>

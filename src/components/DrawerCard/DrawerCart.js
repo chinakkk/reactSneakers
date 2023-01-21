@@ -4,8 +4,11 @@ import AppContext from "../../AppContext";
 import React from "react";
 import Massage from "../Massage";
 
-const DrawerCart = ({onClickDelete, onClickOverlay,onClickCreateOrder,orderIsCreated,orderId}) => {
-    const {cartItems}=React.useContext(AppContext)
+const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsCreated, orderId}) => {
+    const {cartItems} = React.useContext(AppContext)
+    const cartPrice = cartItems.reduce((sum, item) => {
+        return sum + Number(item.price)
+    }, 0)
 
     return (
         <div className="overlay d-flex">
@@ -20,19 +23,19 @@ const DrawerCart = ({onClickDelete, onClickOverlay,onClickCreateOrder,orderIsCre
                 <div className="cartItems">
 
                     {cartItems.length > 0 ?
-                        cartItems.map((item,index) => {
-                        return (
-                            <CartCard
-                                key={index}
-                                item={item}
-                                onClickDelete={onClickDelete}
-                            />
-                        )
-                    }) : <div className={'mt-50'}>
+                        cartItems.map((item, index) => {
+                            return (
+                                <CartCard
+                                    key={index}
+                                    item={item}
+                                    onClickDelete={onClickDelete}
+                                />
+                            )
+                        }) : <div className={'mt-50'}>
                             <Massage
-                                imgSrc={orderIsCreated?'./img/orderCreate.png':"./img/emptyCart.png"}
-                                title={orderIsCreated?'Заказ оформлен':'Корзина пустая'}
-                                text={orderIsCreated?`Ваш заказ #${orderId} скоро будет передан курьерской доставке`:'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'}
+                                imgSrc={orderIsCreated ? './img/orderCreate.png' : "./img/emptyCart.png"}
+                                title={orderIsCreated ? 'Заказ оформлен' : 'Корзина пустая'}
+                                text={orderIsCreated ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке` : 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'}
                                 onClickFunction={onClickOverlay}
                             />
                         </div>
@@ -44,15 +47,16 @@ const DrawerCart = ({onClickDelete, onClickOverlay,onClickCreateOrder,orderIsCre
                     <li className={'d-flex mb-20'}>
                         <span>Итого:</span>
                         <div></div>
-                        <b>21999р</b>
+                        <b>{cartPrice} руб</b>
                     </li>
                     <li className={'d-flex'}>
                         <span>Налог 5%:</span>
                         <div></div>
-                        <b>2000р</b>
+                        <b>{Math.round(cartPrice*0.05)} руб</b>
                     </li>
                 </ul>
-                <img onClick={onClickCreateOrder} className={'createOrderButton button'} src="./img/btnCreateOrder.svg" alt="CreateOrder"/>
+                <img onClick={onClickCreateOrder} className={'createOrderButton button'} src="./img/btnCreateOrder.svg"
+                     alt="CreateOrder"/>
 
             </div>
         </div>

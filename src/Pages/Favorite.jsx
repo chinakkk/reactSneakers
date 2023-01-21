@@ -16,7 +16,6 @@ const Favorite = ({onClickAddToFavorite, onClickAddToCart}) => {
                                 return (
 
                                     <Card
-                                        addedInFavorite
                                         key={index}
                                         onClickFavoriteProps={() => onClickAddToFavorite(item, false)}
                                         onClickPlusProps={() => onClickAddToCart(item)}
