@@ -19,7 +19,7 @@ function App() {
     const [isLoading, setIsLoading] = React.useState(true)
     const [orderIsCreated, setOrderIsCreated] = React.useState(false)
     const [orderId, setOrderId] = React.useState(1)
-
+    const [orderIsLoading,setOrderIsLoading]=React.useState(false)
 
     React.useEffect(() => {
         const responded = async () => {
@@ -42,6 +42,8 @@ function App() {
 
     const onClickCreateOrder = async () => {
         try {
+
+            setOrderIsLoading(true)
             const {data} = await axios.post(`https://63c1bc2b376b9b2e648305db.mockapi.io/order`, {
                 items: [...cartItems]
             })
@@ -55,6 +57,7 @@ function App() {
                 await axios.delete(`https://631a621adc236c0b1edd3f63.mockapi.io/cart/${cartItems[i].id}`)
 
             }
+            setOrderIsLoading(false)
 
         } catch (error) {
             alert('Не удалось создать заказ')
@@ -112,6 +115,7 @@ function App() {
                                            onClickCreateOrder={onClickCreateOrder}
                                            orderIsCreated={orderIsCreated}
                                            orderId={orderId}
+                                           orderIsLoading={orderIsLoading}
                 />}
 
                 <Header onClickCart={() => setCartOpened(true)}

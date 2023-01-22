@@ -4,7 +4,7 @@ import AppContext from "../../AppContext";
 import React from "react";
 import Massage from "../Massage";
 
-const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsCreated, orderId}) => {
+const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsCreated, orderId,orderIsLoading}) => {
     const {cartItems} = React.useContext(AppContext)
     const cartPrice = cartItems.reduce((sum, item) => {
         return sum + Number(item.price)
@@ -55,7 +55,7 @@ const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsC
                         <b>{Math.round(cartPrice*0.05)} руб</b>
                     </li>
                 </ul>
-                <img onClick={onClickCreateOrder} className={'createOrderButton button'} src="./img/btnCreateOrder.svg"
+                <img onClick={cartItems.length && onClickCreateOrder} className={`${orderIsLoading||cartItems.length<1?'buttonIsLoading':'createOrderButton'}`} src="./img/btnCreateOrder.svg"
                      alt="CreateOrder"/>
 
             </div>
