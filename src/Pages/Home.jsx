@@ -28,7 +28,6 @@ const Home = ({
                         key={index}
                         onClickFavoriteProps={() => onClickAddToFavorite(item)}
                         onClickPlusProps={() => onClickAddToCart(item)}
-                        addedInFavorite={favoriteItems.some((favoriteItem) => favoriteItem.name === item.name)}
                         isLoading={isLoading}
                     />
                 )))

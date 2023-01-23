@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 
 
-const Header = ({cartItems, onClickCart, setCartPrice}) => {
+const Header = ({cartItems, onClickCart,orderIsCreated}) => {
 
     const cartPrice = cartItems.reduce((sum, item) => {
         return sum + Number(item.price)
@@ -22,7 +22,7 @@ const Header = ({cartItems, onClickCart, setCartPrice}) => {
             <ul className={'headerRight d-flex align-center mr-30'}>
                 <li className={'mr-20 d-flex align-center cu-p'} onClick={onClickCart}>
                     <img className={'mr-10 button'} width={'18px'} height={'18px'} src={"./img/card.svg"} alt={'Card'}/>
-                    <span>{cartPrice} руб.</span>
+                    <span>{!orderIsCreated?cartPrice:'0'} руб.</span>
                 </li>
 
                 <li className={'d-flex align-center mr-15'}>

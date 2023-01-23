@@ -5,7 +5,7 @@ import AppContext from "../../../AppContext";
 import OrderCard from "./OrderCard";
 
 
-const Order = ({item,orderId,onClickDeleteOrder}) => {
+const Order = ({orderItem,orderId,onClickDeleteOrder}) => {
     return (
         <div className={style.orderCard}>
             <div className={style.header}>
@@ -17,7 +17,7 @@ const Order = ({item,orderId,onClickDeleteOrder}) => {
 
             </div>
             <div className={'d-flex flex-wrap'}>
-                {item.map((item, index) => {
+                {orderItem.map((item, index) => {
                     return (
                         <OrderCard
                             key={index}

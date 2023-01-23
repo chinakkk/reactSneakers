@@ -4,7 +4,7 @@ import AppContext from "../../AppContext";
 import React from "react";
 import Massage from "../Massage";
 
-const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsCreated, orderId,orderIsLoading}) => {
+const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsCreated, orderId}) => {
     const {cartItems} = React.useContext(AppContext)
     const cartPrice = cartItems.reduce((sum, item) => {
         return sum + Number(item.price)
@@ -22,7 +22,7 @@ const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsC
                 </div>
                 <div className="cartItems">
 
-                    {cartItems.length > 0 ?
+                    {(cartItems.length > 0&&!orderIsCreated) ?
                         cartItems.map((item, index) => {
                             return (
                                 <DrawerCartCard
@@ -47,15 +47,15 @@ const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsC
                     <li className={'d-flex mb-20'}>
                         <span>Итого:</span>
                         <div></div>
-                        <b>{cartPrice} руб</b>
+                        <b>{!orderIsCreated? cartPrice:'0'} руб</b>
                     </li>
                     <li className={'d-flex'}>
                         <span>Налог 5%:</span>
                         <div></div>
-                        <b>{Math.round(cartPrice*0.05)} руб</b>
+                        <b>{ !orderIsCreated? Math.round( cartPrice*0.05):'0'} руб</b>
                     </li>
                 </ul>
-                <img onClick={cartItems.length && onClickCreateOrder} className={`${orderIsLoading||cartItems.length<1?'buttonIsLoading':'createOrderButton'}`} src="./img/btnCreateOrder.svg"
+                <img onClick={onClickCreateOrder} className={`${cartItems.length<1||orderIsCreated?'buttonIsOffline':'createOrderButton'}`} src="./img/btnCreateOrder.svg"
                      alt="CreateOrder"/>
 
             </div>
