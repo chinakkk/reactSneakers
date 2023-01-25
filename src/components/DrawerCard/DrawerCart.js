@@ -3,20 +3,21 @@ import DrawerCartCard from "./DrawerCartCard";
 import AppContext from "../../AppContext";
 import React from "react";
 import Massage from "../Massage";
+import style from "./DrawerCard.module.scss"
 
-const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsCreated, orderId}) => {
+const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsCreated, orderId,cartOpened}) => {
     const {cartItems} = React.useContext(AppContext)
     const cartPrice = cartItems.reduce((sum, item) => {
         return sum + Number(item.price)
     }, 0)
 
     return (
-        <div className="overlay d-flex">
-            <div className={'cartGray'} onClick={onClickOverlay}></div>
-            <div className="drawer d-flex flex-column">
+        <div className={`${style.overlay} ${cartOpened && style.overlayVisible}`} >
+            <div className={style.cartGray} onClick={onClickOverlay}></div>
+            <div className={`${style.drawer} ${cartOpened&&style.drawerVisible} d-flex flex-column`}>
                 <div className={'d-flex justify-between'}>
                     <h2 className={'mb-30 mt-30'}>Корзина</h2>
-                    <img className={'button cartRemoveButton'}
+                    <img className={`button ${style.cartRemoveButton}`}
                          src="./img/btnKrest.svg" alt="Krest"
                          onClick={onClickOverlay}/>
                 </div>
@@ -43,7 +44,7 @@ const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsC
                     }
 
                 </div>
-                <ul className={'cartTotalBlock mb-20'}>
+                <ul className={`${style.cartTotalBlock} mb-20`}>
                     <li className={'d-flex mb-20'}>
                         <span>Итого:</span>
                         <div></div>

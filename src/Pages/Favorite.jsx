@@ -29,7 +29,7 @@ const Favorite = ({onClickAddToFavorite, onClickAddToCart}) => {
                             imgSrc={"./img/emptyFavorite.png"}
                             title={'Закладок нет'}
                             text={'Вы ничего не добавили в закладки'}
-                            onClickFunction={onClickAddToFavorite}
+                            onClickFunction={() => {}}
                         />
 
 

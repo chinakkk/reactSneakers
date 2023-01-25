@@ -1,3 +1,5 @@
+import style from './DrawerCard.module.scss'
+
 const DrawerCartCard = ({item, onClickDelete}) => {
 
     const onClickCross = (item) => {
@@ -15,7 +17,7 @@ const DrawerCartCard = ({item, onClickDelete}) => {
             </div>
 
             <img onClick={() => onClickCross(item)}
-                 className={'button cartRemoveButton'}
+                 className={`button ${style.cartRemoveButton}`}
                  src="./img/btnKrest.svg"
                  alt="Krest"/>
         </div>

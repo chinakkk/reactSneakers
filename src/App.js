@@ -1,16 +1,16 @@
+import ContentLoader from "react-content-loader";
+import {logDOM} from "@testing-library/react";
 import React from "react";
 import axios from "axios";
-import ContentLoader from "react-content-loader";
 import {Route, Routes} from "react-router-dom";
 import Header from "./components/Header";
 import DrawerCart from "./components/DrawerCard/DrawerCart";
 import Home from "./Pages/Home";
 import Favorite from "./Pages/Favorite";
-import {logDOM} from "@testing-library/react";
-import AppContext from "./AppContext";
 import OrderPage from "./Pages/OrderPage/OrderPage";
-import favorite from "./Pages/Favorite";
-import order from "./Pages/OrderPage/Order/Order";
+// import order from "./Pages/OrderPage/Order/Order";
+import AppContext from "./AppContext";
+
 
 function App() {
     const [favoriteItems, setFavoriteItems] = React.useState([])
@@ -27,18 +27,23 @@ function App() {
     React.useEffect(() => {
             const responded = async () => {
 
+                try {
+                    const itemsRes = await axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/items')
+                    const cartRes = await axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/cart')
+                    const favoriteRes = await axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/favorite')
+                    const orderRes = await axios.get('https://63c1bc2b376b9b2e648305db.mockapi.io/order')
+                    setIsLoading(false)
 
-                const itemsRes = await axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/items')
-                const cartRes = await axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/cart')
-                const favoriteRes = await axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/favorite')
-                const orderRes = await axios.get('https://63c1bc2b376b9b2e648305db.mockapi.io/order')
-                setIsLoading(false)
+                    setCartItems(cartRes.data)
+                    setFavoriteItems(favoriteRes.data)
+                    setItems(itemsRes.data)
+                    setOrderItems(orderRes.data)
+                    orderRes.data.length && setOrderId(Number(orderRes.data[orderRes.data.length - 1].id))
+                } catch (error) {
+                    alert('Не удалось отправить запросы')
+                    console.error(error)
+                }
 
-                setCartItems(cartRes.data)
-                setFavoriteItems(favoriteRes.data)
-                setItems(itemsRes.data)
-                setOrderItems(orderRes.data)
-                orderRes.data.length && setOrderId(Number(orderRes.data[orderRes.data.length - 1].id))
             }
             responded()
         }
@@ -49,7 +54,7 @@ function App() {
     const onClickCreateOrder = async () => {
         try {
             if (cartItems.length) {
-                setOrderId(orderItems<1?1:Number(orderItems[orderItems.length-1].id)+1)
+                setOrderId(orderItems < 1 ? 1 : Number(orderItems[orderItems.length - 1].id) + 1)
                 setOrderIsCreated(true)
 
                 const {data} = await axios.post(`https://63c1bc2b376b9b2e648305db.mockapi.io/order`, {
@@ -63,11 +68,22 @@ function App() {
             }
         } catch (error) {
             alert('Не удалось создать заказ')
+            console.error(error)
+
         }
     }
-    const removeFromDrawerCart = (id) => {
-        axios.delete(`https://631a621adc236c0b1edd3f63.mockapi.io/cart/${id}`)
-        setCartItems(prevState => [...prevState.filter(item => item.id !== id)])
+    const removeFromDrawerCart = async (id) => {
+
+        try{
+            setCartItems(prevState => [...prevState.filter(item => item.id !== id)])
+            await axios.delete(`https://631a621adc236c0b1edd3f63.mockapi.io/cart/${id}`)
+        }
+        catch(error){
+            alert('Не удалось удалить из корзины')
+            console.error(error)
+
+        }
+
     }
 
     const onClickAddToCart = async (item) => {
@@ -84,6 +100,8 @@ function App() {
             }
         } catch (error) {
             alert('Не удалось добавить в корзину')
+            console.error(error)
+
         }
     }
 
@@ -101,6 +119,8 @@ function App() {
             }
         } catch (error) {
             alert('Товар не добавился в Favorites')
+            console.error(error)
+
         }
 
     }
@@ -121,15 +141,18 @@ function App() {
             setOrderId
         }}>
             <div className="wrapper clear">
-                {cartOpened && <DrawerCart onClickDelete={removeFromDrawerCart}
-                                           onClickOverlay={() => {
-                                               setCartOpened(false)
-                                               setOrderIsCreated(false)
-                                           }}
-                                           onClickCreateOrder={onClickCreateOrder}
-                                           orderIsCreated={orderIsCreated}
-                                           orderId={orderId}
-                />}
+                <DrawerCart orderIsCreated={orderIsCreated}
+                            orderId={orderId}
+                            cartOpened={cartOpened}
+                            onClickDelete={removeFromDrawerCart}
+                            onClickCreateOrder={onClickCreateOrder}
+                            onClickOverlay={() => {
+                                setCartOpened(false)
+                                setOrderIsCreated(false)
+                            }
+                            }
+                />
+
 
                 <Header onClickCart={() => setCartOpened(true)}
                         cartItems={cartItems}

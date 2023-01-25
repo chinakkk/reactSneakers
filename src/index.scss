@@ -42,49 +42,6 @@ header {
 }
 
 
-.overlay {
-  position: absolute;
-  z-index: 1;
-  background-color: rgba(0, 0, 0, 0.5);
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-}
-
-.drawer {
-  position: absolute;
-  right: 0;
-  height: 100%;
-  width: 385px;
-  background-color: #FFFFFF;
-  opacity: 100;
-  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-
-  h2 {
-    margin: 0;
-  }
-
-  ul {
-    font-size: 16px;
-  }
-
-  .cartTotalBlock {
-    div {
-      flex: 1;
-      border-bottom: 1px dashed #F3F3F3;
-      margin: 4px 6px;
-    }
-
-  }
-
-}
-
-.cartGray {
-  height: 100%;
-  flex: 1;
-}
 
 .cartItems {
   flex: 1;
@@ -97,9 +54,7 @@ header {
   overflow: auto;
   text-align: center;
   margin: auto auto;
-  img{
-    height: 100px;
-  }
+
   h2{
     font-weight: 600;
   }
@@ -137,7 +92,6 @@ header {
   transition: opacity 0.2s ease-in-out;
   cursor: pointer;
 
-
   &:hover {
     opacity: 0.8;
   }
@@ -173,14 +127,6 @@ header {
 
 }
 
-.cartRemoveButton {
-  opacity: 0.5;
-  transition: opacity 0.2s ease-in-out;
-
-  &:hover {
-    opacity: 1;
-  }
-}
 
 
 .searchBlock {
