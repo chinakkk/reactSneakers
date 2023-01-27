@@ -8,7 +8,7 @@ const Favorite = ({onClickAddToFavorite, onClickAddToCart}) => {
     const {favoriteItems} = React.useContext(AppContext)
 
     return (
-        <div className={s.favoiteContent}>
+        <div className={s.favoriteContent}>
             <h1>Избранное</h1>
             <div className={s.favoriteCard}>
                 {

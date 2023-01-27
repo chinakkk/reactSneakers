@@ -9,7 +9,6 @@ import Home from "./Pages/Home/Home";
 import Favorite from "./Pages/Favorite/Favorite";
 import OrderPage from "./Pages/OrderPage/OrderPage";
 import s from "./App.module.scss"
-import order from "./Pages/OrderPage/Order/Order";
 import AppContext from "./AppContext";
 
 
@@ -99,17 +98,6 @@ function App() {
                 setCartItems(prevState => [...prevState, item])
                 const {data} = await axios.post(`https://631a621adc236c0b1edd3f63.mockapi.io/cart`, item)
                 setCartItems(prevState => [...prevState.slice(0, -1), data])
-                // setCartItems(prevState => {
-                //     prevState.map((cartItem) => {
-                //         if (cartItem.name === item.name){
-                //             return {
-                //             id:data.id,
-                //             ...cartItem
-                //             }
-                //         }
-                //         else return cartItem
-                //     })
-                // })
             }
         } catch (error) {
             alert('Не удалось добавить в корзину')

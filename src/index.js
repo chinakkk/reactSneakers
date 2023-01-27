@@ -13,25 +13,3 @@ root.render(
         </Router>
     </React.StrictMode>
 );
-//
-// ,
-// {
-//     "name": "Мужские Кроссовки abibas none name",
-//     "price": "1999",
-//     "src": "./img/sneakers/5.jpg"
-// },
-// {
-//     "name": "Мужские Кроссовки Puma Like dd",
-//     "price": "1999",
-//     "src": "./img/sneakers/6.jpg"
-// },
-// {
-//     "name": "Мужские Кроссовки Puma Like S102",
-//     "price": "1999",
-//     "src": "./img/sneakers/7.jpg"
-// },
-// {
-//     "name": "Мужские Кроссовки Xiaomi",
-//     "price": "1999",
-//     "src": "./img/sneakers/8.jpg"
-// }

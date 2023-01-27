@@ -22,7 +22,7 @@ const OrderPage = () => {
 
     }
     return (
-        <div className="content p-40">
+        <div className={s.contentOrder}>
             <h1>Все заказы</h1>
             <div className={s.orders}>
                 {

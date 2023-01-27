@@ -55,8 +55,10 @@ const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsC
                         <b>{ !orderIsCreated? Math.round( cartPrice*0.05):'0'} руб</b>
                     </li>
                 </ul>
-                <img onClick={onClickCreateOrder} className={cartItems.length<1||orderIsCreated ? s.buttonIsOffline : s.createOrderButton} src="img/btnCreateOrder.svg"
-                     alt="CreateOrder"/>
+                <img onClick={onClickCreateOrder} className={cartItems.length<1||orderIsCreated ? s.buttonIsOffline : s.createOrderButton}
+                     src="img/btnCreateOrder.svg"
+                     alt="CreateOrder"
+                />
 
             </div>
         </div>
