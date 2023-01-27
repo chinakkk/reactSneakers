@@ -19,6 +19,8 @@
 
 }
 .drawer {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   right: 0;
   height: 100%;
@@ -33,13 +35,38 @@
   ul {
     font-size: 16px;
   }
+  .drawerHeader{
+    display: flex;
+    justify-content: space-between;
+    h2{
+      margin-bottom: 30px;
+      margin-top: 30px;
+    }
+  }
+
   .cartTotalBlock {
+    margin-bottom: 20px;
     div {
       flex: 1;
       border-bottom: 1px dashed #F3F3F3;
       margin: 4px 6px;
     }
+    li{
+      display: flex;
+    }
+    .resultPrice{
+      margin-bottom: 20px;
+    }
   }
+  .cartItems {
+    flex: 1;
+    overflow: auto;
+    margin-bottom: 20px;
+    .message{
+      margin-top: 50px;
+    }
+  }
+
 }
 
 .cartGray {
@@ -51,6 +78,7 @@
 .cartRemoveButton {
   opacity: 0.5;
   transition: opacity 0.2s ease-in-out;
+  cursor: pointer;
 
   &:hover {
     opacity: 1;
@@ -58,4 +86,25 @@
 }
 .scrollHidden{
   overflow-y: scroll;
+}
+
+.createOrderButton {
+  height: 55px;
+  width: 325px;
+  transition: opacity 0.2s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 1;
+  }
+}
+.buttonIsOffline{
+  opacity: 0.6;
+  cursor: default;
+  height: 55px;
+  width: 325px;
 }

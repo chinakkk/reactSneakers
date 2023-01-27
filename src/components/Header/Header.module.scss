@@ -1,0 +1,59 @@
+.header{
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+  border-bottom: 1px solid #EAEAEA;
+
+
+  .headerLogo{
+    display: flex;
+    align-items: center;
+    img{
+      margin-right: 20px;
+    }
+  }
+
+  .headerInfo {
+    h3, p {
+      margin: 0 0;
+    }
+    h3{
+      text-transform: uppercase;
+    }
+    p{
+      opacity: 0.5;
+    }
+  }
+  .headerNavigation{
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+  }
+
+  .card{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 20px;
+    img{
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  }
+  .favorites{
+    margin-right: 15px;
+    img{
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+  }
+  .order{
+    img{
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+}

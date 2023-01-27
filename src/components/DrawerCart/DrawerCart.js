@@ -1,9 +1,9 @@
 import {logDOM} from "@testing-library/react";
-import DrawerCartCard from "./DrawerCartCard";
+import DrawerCartCard from "./DrawerCartCard/DrawerCartCard";
 import AppContext from "../../AppContext";
 import React from "react";
-import Message from "../Message";
-import style from "./DrawerCard.module.scss"
+import Message from "../Message/Message";
+import s from "./DrawerCart.module.scss"
 
 const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsCreated, orderId,cartOpened}) => {
     const {cartItems} = React.useContext(AppContext)
@@ -12,17 +12,16 @@ const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsC
     }, 0)
 
     return (
-        <div className={`${style.overlay} ${cartOpened && style.overlayVisible}`} >
-            <div className={style.cartGray} onClick={onClickOverlay}></div>
-            <div className={`${style.drawer} ${cartOpened&&style.drawerVisible} d-flex flex-column`}>
-                <div className={'d-flex justify-between'}>
-                    <h2 className={'mb-30 mt-30'}>Корзина</h2>
-                    <img className={`button ${style.cartRemoveButton}`}
-                         src="img/btnKrest.svg" alt="Krest"
+        <div className={`${s.overlay} ${cartOpened && s.overlayVisible}`} >
+            <div className={s.cartGray} onClick={onClickOverlay}></div>
+            <div className={`${s.drawer} ${cartOpened&&s.drawerVisible}`}>
+                <div className={s.drawerHeader}>
+                    <h2 >Корзина</h2>
+                    <img className={s.cartRemoveButton}
+                         src="img/btnKrest.svg" alt="Close"
                          onClick={onClickOverlay}/>
                 </div>
-                <div className="cartItems">
-
+                <div className={s.cartItems}>
                     {(cartItems.length > 0&&!orderIsCreated) ?
                         cartItems.map((item, index) => {
                             return (
@@ -32,7 +31,7 @@ const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsC
                                     onClickDelete={onClickDelete}
                                 />
                             )
-                        }) : <div className={'mt-50'}>
+                        }) : <div className={s.message}>
                             <Message
                                 imgSrc={orderIsCreated ? 'img/orderCreate.png' : "img/emptyCart.png"}
                                 title={orderIsCreated ? 'Заказ оформлен' : 'Корзина пустая'}
@@ -44,19 +43,19 @@ const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsC
                     }
 
                 </div>
-                <ul className={`${style.cartTotalBlock} mb-20`}>
-                    <li className={'d-flex mb-20'}>
+                <ul className={s.cartTotalBlock}>
+                    <li className={s.resultPrice}>
                         <span>Итого:</span>
                         <div></div>
                         <b>{!orderIsCreated? cartPrice:'0'} руб</b>
                     </li>
-                    <li className={'d-flex'}>
+                    <li>
                         <span>Налог 5%:</span>
                         <div></div>
                         <b>{ !orderIsCreated? Math.round( cartPrice*0.05):'0'} руб</b>
                     </li>
                 </ul>
-                <img onClick={onClickCreateOrder} className={`${cartItems.length<1||orderIsCreated?'buttonIsOffline':'createOrderButton'}`} src="img/btnCreateOrder.svg"
+                <img onClick={onClickCreateOrder} className={cartItems.length<1||orderIsCreated ? s.buttonIsOffline : s.createOrderButton} src="img/btnCreateOrder.svg"
                      alt="CreateOrder"/>
 
             </div>

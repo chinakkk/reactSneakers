@@ -1,10 +1,11 @@
 import React from "react";
 import {Link} from 'react-router-dom';
+import s from './Message.module.scss'
 
 
 const Massage = ({imgSrc, title, text, onClickFunction}) => {
     return (
-        <div className={'cartIsClear'}>
+        <div className={s.cartIsClear}>
             <img src={imgSrc} alt="" />
             <h2>{title}</h2>
             <h4>{text}</h4>

@@ -1,0 +1,44 @@
+.content {
+  h1 {
+    margin: 0;
+  }
+  padding: 40px;
+  .search{
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    justify-content: space-between;
+    margin-right: 25px;
+    margin-left: 25px;
+    .searchBlock {
+      border: 1px solid #F2F2F2;
+      padding: 5px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+
+      img {
+        margin-left: 10px;
+        margin-right: 5px;
+      }
+
+      input {
+        border: 0;
+        font-size: 16px;
+        width: 165px;
+
+      }
+      .searchButton{
+        cursor: pointer;
+        width: 20px;
+        position: absolute;
+        margin-left: 174px;
+      }
+    }
+  }
+
+  .items{
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

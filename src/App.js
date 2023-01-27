@@ -3,12 +3,12 @@ import {logDOM} from "@testing-library/react";
 import React from "react";
 import axios from "axios";
 import {Route, Routes} from "react-router-dom";
-import Header from "./components/Header";
-import DrawerCart from "./components/DrawerCard/DrawerCart";
-import Home from "./Pages/Home";
-import Favorite from "./Pages/Favorite";
+import Header from "./components/Header/Header";
+import DrawerCart from "./components/DrawerCart/DrawerCart";
+import Home from "./Pages/Home/Home";
+import Favorite from "./Pages/Favorite/Favorite";
 import OrderPage from "./Pages/OrderPage/OrderPage";
-import style from "./App.module.scss"
+import s from "./App.module.scss"
 import order from "./Pages/OrderPage/Order/Order";
 import AppContext from "./AppContext";
 
@@ -131,7 +131,7 @@ function App() {
                 setFavoriteItems(prevState => [...prevState, data])
             }
         } catch (error) {
-            alert('Товар не добавился в Favorites')
+            alert('Товар не добавился в Favorite')
             console.error(error)
 
         }
@@ -148,13 +148,19 @@ function App() {
     return (
 
         <AppContext.Provider value={{
-            cartItems, favoriteItems, itemIsAddedCart,
-            itemIsAddedFavorite, onClickAddToCart, orderIsCreated,
-            setOrderIsCreated, orderItems, setOrderItems,
+            cartItems,
+            favoriteItems,
+            itemIsAddedCart,
+            itemIsAddedFavorite,
+            onClickAddToCart,
+            orderIsCreated,
+            setOrderIsCreated,
+            orderItems,
+            setOrderItems,
             setOrderId
         }}>
 
-            <div className="wrapper clear">
+            <div className={s.wrapper}>
                 <DrawerCart orderIsCreated={orderIsCreated}
                             orderId={orderId}
                             cartOpened={cartOpened}
@@ -174,7 +180,7 @@ function App() {
                 />
 
                 <Routes>
-                    <Route path={''} element={
+                    <Route path={"/"} element={
 
                         <Home
                             cartItems={cartItems}
@@ -187,13 +193,13 @@ function App() {
                             isLoading={isLoading}
                         />
                     }/>
-                    <Route path='favorite' element={
+                    <Route path="/favorite" element={
                         <Favorite
                             onClickAddToFavorite={onClickAddToFavorite}
                             onClickAddToCart={onClickAddToCart}
                         />
                     }/>
-                    <Route path={'order'} element={
+                    <Route path={"/order"} element={
                         <OrderPage
                         />
                     }/>

@@ -1,4 +1,4 @@
-import style from './DrawerCard.module.scss'
+import s from './DrawerCartCard.module.scss'
 
 const DrawerCartCard = ({item, onClickDelete}) => {
 
@@ -8,18 +8,18 @@ const DrawerCartCard = ({item, onClickDelete}) => {
     }
 
     return (
-        <div className={'cartItem d-flex align-center'}>
-            <img className={'mb-20 mr-20'} height={70} width={70} src={item.src}
+        <div className={s.cartItem}>
+            <img className={s.sneakers} height={70} width={70} src={item.src}
                  alt="SneakersCard"/>
             <div>
-                <p className={'mb-5 mr-20'}>{item.name}</p>
+                <p>{item.name}</p>
                 <b>{item.price} руб.</b>
             </div>
 
             <img onClick={() => onClickCross(item)}
-                 className={`button ${style.cartRemoveButton}`}
+                 className={s.cartRemoveButton}
                  src="img/btnKrest.svg"
-                 alt="Krest"/>
+                 alt="Delete"/>
         </div>
     )
 }

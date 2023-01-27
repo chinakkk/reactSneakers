@@ -1,5 +1,6 @@
 import React from "react";
-import style from '../../../components/Card/Card.module.scss'
+import s from '../../../components/Card/Card.module.scss'
+
 
 
 const OrderCard = ({
@@ -10,12 +11,11 @@ const OrderCard = ({
 
 
     return (
-        <div className={style.card}>
-
+        <div className={s.card}>
             <img width={133} height={112} src={src} alt={'Sneakers'}/>
             <h5>{name}</h5>
-            <div className={style.cardBottom + ` d-flex justify-between align-center`}>
-                <div className={'d-flex flex-column'}>
+            <div className={s.cardBottom}>
+                <div className={s.price}>
                     <p>Цена</p>
                     <b>{price} р.</b>
                 </div>

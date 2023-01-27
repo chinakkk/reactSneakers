@@ -1,19 +1,20 @@
 import React from "react";
-import Message from "../../components/Message";
 import axios from "axios";
-import Order from "./Order/Order";
 import AppContext from "../../AppContext";
+import Message from "../../components/Message/Message";
+import Order from "./Order/Order";
+import s from './OrderPage.module.scss'
 
 const OrderPage = () => {
 
-    const {orderItems, setOrderItems,setOrderId}=React.useContext(AppContext)
+    const {orderItems, setOrderItems, setOrderId} = React.useContext(AppContext)
 
 
     const onClickDeleteOrder = (id) => {
         try {
             axios.delete(`https://63c1bc2b376b9b2e648305db.mockapi.io/order/${id}`)
             setOrderItems(prevState => [...prevState.filter(item => item.id !== id)])
-            setOrderId(prevState => prevState-1)
+            setOrderId(prevState => prevState - 1)
 
         } catch (error) {
             alert('Не удалось удалить заказ')
@@ -23,7 +24,7 @@ const OrderPage = () => {
     return (
         <div className="content p-40">
             <h1>Все заказы</h1>
-            <div className={'d-flex flex-wrap mt-30'}>
+            <div className={s.orders}>
                 {
                     orderItems.length > 0 ?
                         orderItems.map((orderItem, index) => {
