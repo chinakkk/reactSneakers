@@ -8,7 +8,8 @@ import DrawerCart from "./components/DrawerCard/DrawerCart";
 import Home from "./Pages/Home";
 import Favorite from "./Pages/Favorite";
 import OrderPage from "./Pages/OrderPage/OrderPage";
-// import order from "./Pages/OrderPage/Order/Order";
+import style from "./App.module.scss"
+import order from "./Pages/OrderPage/Order/Order";
 import AppContext from "./AppContext";
 
 
@@ -28,10 +29,12 @@ function App() {
             const responded = async () => {
 
                 try {
-                    const itemsRes = await axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/items')
-                    const cartRes = await axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/cart')
-                    const favoriteRes = await axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/favorite')
-                    const orderRes = await axios.get('https://63c1bc2b376b9b2e648305db.mockapi.io/order')
+                    const [itemsRes, cartRes, favoriteRes, orderRes] = await Promise.all([
+                        axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/items'),
+                        axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/cart'),
+                        axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/favorite'),
+                        axios.get('https://63c1bc2b376b9b2e648305db.mockapi.io/order')
+                    ])
                     setIsLoading(false)
 
                     setCartItems(cartRes.data)
@@ -74,11 +77,10 @@ function App() {
     }
     const removeFromDrawerCart = async (id) => {
 
-        try{
+        try {
             setCartItems(prevState => [...prevState.filter(item => item.id !== id)])
             await axios.delete(`https://631a621adc236c0b1edd3f63.mockapi.io/cart/${id}`)
-        }
-        catch(error){
+        } catch (error) {
             alert('Не удалось удалить из корзины')
             console.error(error)
 
@@ -97,6 +99,17 @@ function App() {
                 setCartItems(prevState => [...prevState, item])
                 const {data} = await axios.post(`https://631a621adc236c0b1edd3f63.mockapi.io/cart`, item)
                 setCartItems(prevState => [...prevState.slice(0, -1), data])
+                // setCartItems(prevState => {
+                //     prevState.map((cartItem) => {
+                //         if (cartItem.name === item.name){
+                //             return {
+                //             id:data.id,
+                //             ...cartItem
+                //             }
+                //         }
+                //         else return cartItem
+                //     })
+                // })
             }
         } catch (error) {
             alert('Не удалось добавить в корзину')
@@ -140,6 +153,7 @@ function App() {
             setOrderIsCreated, orderItems, setOrderItems,
             setOrderId
         }}>
+
             <div className="wrapper clear">
                 <DrawerCart orderIsCreated={orderIsCreated}
                             orderId={orderId}

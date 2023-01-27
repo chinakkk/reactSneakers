@@ -1,7 +1,7 @@
 import Card from "../components/Card/Card";
 import React from "react";
 import AppContext from "../AppContext";
-import Massage from "../components/Massage";
+import Message from "../components/Message";
 
 const Favorite = ({onClickAddToFavorite, onClickAddToCart}) => {
     const {favoriteItems} = React.useContext(AppContext)
@@ -25,7 +25,7 @@ const Favorite = ({onClickAddToFavorite, onClickAddToCart}) => {
                             }
                         )
                         :
-                        <Massage
+                        <Message
                             imgSrc={"./img/emptyFavorite.png"}
                             title={'Закладок нет'}
                             text={'Вы ничего не добавили в закладки'}

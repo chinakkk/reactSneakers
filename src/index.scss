@@ -4,6 +4,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #343338;
+  //overflow: hidden;
+
 }
 
 * {
@@ -149,4 +151,8 @@ header {
     position: absolute;
     margin-left: 174px;
   }
+}
+
+.overflowh{
+  overflow: hidden;
 }

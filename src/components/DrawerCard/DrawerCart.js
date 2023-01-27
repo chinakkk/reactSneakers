@@ -2,7 +2,7 @@ import {logDOM} from "@testing-library/react";
 import DrawerCartCard from "./DrawerCartCard";
 import AppContext from "../../AppContext";
 import React from "react";
-import Massage from "../Massage";
+import Message from "../Message";
 import style from "./DrawerCard.module.scss"
 
 const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsCreated, orderId,cartOpened}) => {
@@ -33,7 +33,7 @@ const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsC
                                 />
                             )
                         }) : <div className={'mt-50'}>
-                            <Massage
+                            <Message
                                 imgSrc={orderIsCreated ? './img/orderCreate.png' : "./img/emptyCart.png"}
                                 title={orderIsCreated ? 'Заказ оформлен' : 'Корзина пустая'}
                                 text={orderIsCreated ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке` : 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'}

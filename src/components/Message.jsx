@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom';
 
 
 const Massage = ({imgSrc, title, text, onClickFunction}) => {
@@ -7,7 +8,10 @@ const Massage = ({imgSrc, title, text, onClickFunction}) => {
             <img src={imgSrc} alt="" />
             <h2>{title}</h2>
             <h4>{text}</h4>
-            <button onClick={onClickFunction}>Вернуться назад</button>
+            <Link to='/'>
+                <button onClick={onClickFunction}>Вернуться назад</button>
+
+            </Link>
         </div>
     )
 }

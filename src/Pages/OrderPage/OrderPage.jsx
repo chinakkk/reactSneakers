@@ -1,5 +1,5 @@
 import React from "react";
-import Massage from "../../components/Massage";
+import Message from "../../components/Message";
 import axios from "axios";
 import Order from "./Order/Order";
 import AppContext from "../../AppContext";
@@ -38,7 +38,7 @@ const OrderPage = () => {
                             }
                         )
                         :
-                        <Massage
+                        <Message
                             imgSrc={"./img/emptyFavorite.png"}
                             title={'Заказов нет'}
                             text={'Вы еще не совершили заказ'}
