@@ -18,7 +18,7 @@ const DrawerCartCard = ({item, onClickDelete}) => {
 
             <img onClick={() => onClickCross(item)}
                  className={`button ${style.cartRemoveButton}`}
-                 src="./img/btnKrest.svg"
+                 src="img/btnKrest.svg"
                  alt="Krest"/>
         </div>
     )

@@ -26,7 +26,7 @@ const Favorite = ({onClickAddToFavorite, onClickAddToCart}) => {
                         )
                         :
                         <Message
-                            imgSrc={"./img/emptyFavorite.png"}
+                            imgSrc={"img/emptyFavorite.png"}
                             title={'Закладок нет'}
                             text={'Вы ничего не добавили в закладки'}
                             onClickFunction={() => {}}

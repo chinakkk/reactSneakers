@@ -39,7 +39,7 @@ const OrderPage = () => {
                         )
                         :
                         <Message
-                            imgSrc={"./img/emptyFavorite.png"}
+                            imgSrc={"img/emptyFavorite.png"}
                             title={'Заказов нет'}
                             text={'Вы еще не совершили заказ'}
                             onClickFunction={() => {

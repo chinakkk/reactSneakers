@@ -12,7 +12,7 @@ const Order = ({orderItem,orderId,onClickDeleteOrder}) => {
                 <h2>Заказ №{orderId}</h2>
                 <img onClick={() => {onClickDeleteOrder(orderId)}}
                      className={'button cartRemoveButton mb-10'}
-                     src="./img/btnKrest.svg"
+                     src="img/btnKrest.svg"
                      alt="Krest"/>
 
             </div>

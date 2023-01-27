@@ -29,7 +29,7 @@ const Card = ({
         <div className={style.card}>
             <div className={style.favorite}>
                 <img onClick={onClickFavorite}
-                     src={`./img/btnHeart${(inFavorite || isAddedInFavorite) ? '1' : '0'}.svg`}
+                     src={`img/btnHeart${(inFavorite || isAddedInFavorite) ? '1' : '0'}.svg`}
                      alt="Like"/>
             </div>
             <img width={133} height={112} src={src} alt={'Sneakers'}/>
@@ -40,7 +40,7 @@ const Card = ({
                     <b>{price} р.</b>
                 </div>
                 <img className={'d-flex align-center m-5 cu-p'}
-                     src={'./img/btn' + ((itemIsAddedCart(name)&&!orderIsCreated) ? 'Added' : 'Plus') + '.svg'} onClick={onClickPlus}/>
+                     src={'img/btn' + ((itemIsAddedCart(name)&&!orderIsCreated) ? 'Added' : 'Plus') + '.svg'} onClick={onClickPlus}/>
             </div>
 
         </div>

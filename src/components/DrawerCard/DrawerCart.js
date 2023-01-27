@@ -18,7 +18,7 @@ const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsC
                 <div className={'d-flex justify-between'}>
                     <h2 className={'mb-30 mt-30'}>Корзина</h2>
                     <img className={`button ${style.cartRemoveButton}`}
-                         src="./img/btnKrest.svg" alt="Krest"
+                         src="img/btnKrest.svg" alt="Krest"
                          onClick={onClickOverlay}/>
                 </div>
                 <div className="cartItems">
@@ -34,7 +34,7 @@ const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsC
                             )
                         }) : <div className={'mt-50'}>
                             <Message
-                                imgSrc={orderIsCreated ? './img/orderCreate.png' : "./img/emptyCart.png"}
+                                imgSrc={orderIsCreated ? 'img/orderCreate.png' : "img/emptyCart.png"}
                                 title={orderIsCreated ? 'Заказ оформлен' : 'Корзина пустая'}
                                 text={orderIsCreated ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке` : 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'}
                                 onClickFunction={onClickOverlay}
@@ -56,7 +56,7 @@ const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsC
                         <b>{ !orderIsCreated? Math.round( cartPrice*0.05):'0'} руб</b>
                     </li>
                 </ul>
-                <img onClick={onClickCreateOrder} className={`${cartItems.length<1||orderIsCreated?'buttonIsOffline':'createOrderButton'}`} src="./img/btnCreateOrder.svg"
+                <img onClick={onClickCreateOrder} className={`${cartItems.length<1||orderIsCreated?'buttonIsOffline':'createOrderButton'}`} src="img/btnCreateOrder.svg"
                      alt="CreateOrder"/>
 
             </div>
