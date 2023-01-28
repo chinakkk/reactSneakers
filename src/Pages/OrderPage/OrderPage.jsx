@@ -18,6 +18,7 @@ const OrderPage = () => {
 
         } catch (error) {
             alert('Не удалось удалить заказ')
+            console.error(error)
         }
 
     }

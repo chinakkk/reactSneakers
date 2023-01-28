@@ -97,7 +97,11 @@ function App() {
             } else {
                 setCartItems(prevState => [...prevState, item])
                 const {data} = await axios.post(`https://631a621adc236c0b1edd3f63.mockapi.io/cart`, item)
-                setCartItems(prevState => [...prevState.slice(0, -1), data])
+                // setCartItems(prevState => [...prevState.slice(0, -1), data])
+                setCartItems(prevState => [...prevState.map((cartItem) => {
+                    if (cartItem.name===item.name)return data
+                    return cartItem
+                })])
             }
         } catch (error) {
             alert('Не удалось добавить в корзину')
