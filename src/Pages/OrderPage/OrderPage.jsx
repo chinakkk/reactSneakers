@@ -12,7 +12,7 @@ const OrderPage = () => {
 
     const onClickDeleteOrder = (id) => {
         try {
-            axios.delete(`https://63c1bc2b376b9b2e648305db.mockapi.io/order/${id}`)
+            axios.delete(`https://63da0275b28a3148f67cfe09.mockapi.io/order/${id}`)
             setOrderItems(prevState => [...prevState.filter(item => item.id !== id)])
             setOrderId(prevState => prevState - 1)
 

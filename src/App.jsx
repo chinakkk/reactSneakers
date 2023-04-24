@@ -32,7 +32,7 @@ function App() {
                         axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/items'),
                         axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/cart'),
                         axios.get('https://631a621adc236c0b1edd3f63.mockapi.io/favorite'),
-                        axios.get('https://63c1bc2b376b9b2e648305db.mockapi.io/order')
+                        axios.get('https://63da0275b28a3148f67cfe09.mockapi.io/order')
                     ])
                     setIsLoading(false)
 
@@ -59,7 +59,7 @@ function App() {
                 setOrderId(orderItems < 1 ? 1 : Number(orderItems[orderItems.length - 1].id) + 1)
                 setOrderIsCreated(true)
 
-                const {data} = await axios.post(`https://63c1bc2b376b9b2e648305db.mockapi.io/order`, {
+                const {data} = await axios.post(`https://63da0275b28a3148f67cfe09.mockapi.io/order`, {
                     items: [...cartItems]
                 })
                 setOrderItems(prevState => [...prevState, data])

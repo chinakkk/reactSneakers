@@ -39,7 +39,6 @@ const DrawerCart = ({onClickDelete, onClickOverlay, onClickCreateOrder, orderIsC
                                 onClickFunction={onClickOverlay}
                             />
                         </div>
-
                     }
 
                 </div>
